@@ -60,16 +60,18 @@ public class VetorGenerico implements IVetor {
     }
 
     public String imprime() {
+        int i;
         final StringBuilder stringBuilder = new StringBuilder();
-//        for(int i = 0; i<totalElementos; i++){
-//            if(this.elementos[i].equals(stringBuilder.isEmpty())) {
-//                return "Lista vazia!";
-//            }
-//        }
-        for (int i = 0; i < totalElementos; i++) {
-            stringBuilder.append("Elemento "+(i+1)+": ");
-            stringBuilder.append(elementos[i]);
-            stringBuilder.append("\n");
+        for (i = 0; i<elementos.length; i++) {
+            if (this.elementos[i] == null) {
+                return "Lista vazia!";
+            } else {
+                for (i = 0; i < totalElementos; i++) {
+                    stringBuilder.append("Elemento " + (i + 1) + ": ");
+                    stringBuilder.append(elementos[i]);
+                    stringBuilder.append("\n");
+                }
+            }
         }
         return stringBuilder.toString();
     }
