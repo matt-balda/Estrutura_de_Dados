@@ -1,28 +1,26 @@
 public class Noh {
-    private Object info;
-    private Noh prox;
+    private Object valor;
+    private Noh proximo;
 
-    public Noh(Object info) {
-        this.info = this.info;
-        this.prox = null;
-    }
-
-    public Object getInfo() {
-        return info;
+    public Noh(Object valor) {
+        this.valor = valor;
+        this.proximo = null;
     }
 
-    public void setInfo(Object info) {
-        this.info = info;
+    public Object getValor() {
+        return valor;
     }
 
-    public Noh getProx() {
-        return prox;
+    public void setValor(Object valor) {
+        this.valor = valor;
     }
 
-    public void setProx(Noh prox) {
-        this.prox = prox;
+    public Noh getProximo() {
+        return proximo;
     }
-    public void imprime(){
-        for (int i =0; getInfo());
+
+    public void setProximo(Noh proximo) {
+        this.proximo = proximo;
     }
+
 }

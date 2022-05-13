@@ -7,12 +7,12 @@ public class LSE implements ILista {
     }
 
     @Override
-    public void insereInicio(Object info) {
-        Noh novo = new Noh(info);
-        if (inicio == null){
+    public void insereInicio(Object valor) {
+        Noh novo = new Noh(valor);
+        if (inicio == null) {
             inicio = novo;
-        }else{
-            novo.setProx(inicio);
+        } else {
+            novo.setProximo(inicio);
             inicio = novo;
 
         }
@@ -20,40 +20,43 @@ public class LSE implements ILista {
     }
 
     @Override
-    public void insereFim(Object info) {
-        Noh novo = new Noh(info);
-        if (inicio == null){
+    public void insereFim(Object valor) {
+        Noh novo = new Noh(valor);
+        if (inicio == null) {
             inicio = novo;
-        }else {
+        } else {
             Noh ultimo = null;
-            for (Noh i=inicio; i != null; i=i.getProx()){
+            for (Noh i = inicio; i != null; i = i.getProximo()) {
                 ultimo = i;
             }
-            ultimo.setProx(novo);
+            ultimo.setProximo(novo);
             contElementos++;
         }
     }
 
     @Override
-    public boolean estahvazia() {
+    public boolean estahVazia() {
+        for (Noh i = inicio; i == null; i = i.getProximo()) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean remove(Object info) {
+    public boolean remove(Object valor) {
         Noh ant = null, p;
         p = inicio;
-        while(p!=null && p.getInfo() != info){
+        while (p != null && p.getValor() != valor) {
             ant = p;
-            p = p.getProx();
+            p = p.getProximo();
         }
-        if (p==null){
+        if (p == null) {
             return false;
         }
-        if (ant == null){
-            inicio = p.getProx();
-        }else{
-            ant.setProx(p.getProx());
+        if (ant == null) {
+            inicio = p.getProximo();
+        } else {
+            ant.setProximo(p.getProximo());
         }
         contElementos--;
         return true;
@@ -63,4 +66,19 @@ public class LSE implements ILista {
     public int tamanho() {
         return contElementos;
     }
+
+    public String imprime() {
+        int j = 0;
+        final StringBuilder stringBuilder = new StringBuilder();
+        estahVazia();
+        for (Noh i = inicio; i != null; i = i.getProximo()) {
+            j++;
+            stringBuilder.append("Elemento " + j + ": ");
+            stringBuilder.append(i.getValor());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
+
+
