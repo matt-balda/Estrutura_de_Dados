@@ -3,9 +3,9 @@ public class Main {
         /**
          Instanciação da lista genérica, aluno e declaração de variáveis
          */
-        LSE lista = new LSE();
+        LDE lista = new LDE();
         int elemento1 = 100;
-        double elemento2 = 95.5;
+        int elemento2 = 95;
         Aluno a1 = new Aluno("Mateus", 18, 10);
         Aluno a2 = new Aluno("Gabriel", 22, 9);
 
@@ -15,16 +15,17 @@ public class Main {
         lista.insereInicio(5);
         lista.insereInicio(30);
         lista.insereInicio(elemento1);
-        lista.insereInicio(elemento2);
+        lista.insereInicio(a1);
+        lista.insereInicio(a2);
+        lista.insereFim(elemento2);
         /**
          * Insere no fim
          */
-        lista.insereFim(a1);
-        lista.insereFim(a2);
+        lista.insereFim(15);
         /**
          * Remove um elemento
          */
-        System.out.println("Removeu: " + lista.remove(elemento1));
+        System.out.println("Removeu: " + lista.remove(elemento2));
         /**
          * Verifica se a lista está vazia
          */
@@ -38,5 +39,7 @@ public class Main {
          * Imprime lista
          */
         System.out.println(lista.imprime());
+        System.out.printf(lista.imprimeInverso());;
+        System.out.printf("Buscou: "+lista.busca(a1));
     }
 }

@@ -1,9 +1,11 @@
 public class Noh {
     private Object valor;
+    private Noh ant;
     private Noh proximo;
 
     public Noh(Object valor) {
         this.valor = valor;
+        this.ant = null;
         this.proximo = null;
     }
 
@@ -23,4 +25,11 @@ public class Noh {
         this.proximo = proximo;
     }
 
+    public Noh getAnt() {
+        return ant;
+    }
+
+    public void setAnt(Noh ant) {
+        this.ant = ant;
+    }
 }
