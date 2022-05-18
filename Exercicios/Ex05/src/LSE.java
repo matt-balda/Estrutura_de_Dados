@@ -1,11 +1,9 @@
-public class LDE implements ILista {
+public class LSE implements ILista {
     private Noh inicio;
-    private Noh fim;
     private int contElementos;
 
-    public LDE() {
+    public LSE() {
         this.inicio = null;
-        this.fim = null;
     }
 
     @Override
@@ -13,10 +11,8 @@ public class LDE implements ILista {
         Noh novo = new Noh(valor);
         if (inicio == null) {
             inicio = novo;
-            fim = novo;
         } else {
             novo.setProximo(inicio);
-            inicio.setAnt(novo);
             inicio = novo;
 
         }
@@ -26,16 +22,17 @@ public class LDE implements ILista {
     @Override
     public void insereFim(Object valor) {
         Noh novo = new Noh(valor);
-        if (fim == null) {
+        if (inicio == null) {
             inicio = novo;
-            fim = novo;
         } else {
-            novo.setAnt(fim);
-            fim.setProximo(novo);
-            fim = novo;
+            Noh ultimo = null;
+            for (Noh i = inicio; i != null; i = i.getProximo()) {
+                ultimo = i;
             }
+            ultimo.setProximo(novo);
             contElementos++;
         }
+    }
 
     @Override
     public boolean estahVazia() {
@@ -47,31 +44,24 @@ public class LDE implements ILista {
 
     @Override
     public boolean remove(Object valor) {
-        Noh p = inicio;
-        busca(valor);
-        if (p.getAnt() == null){
-            inicio = p.getProximo();
-            inicio.setAnt(null);
-        } else if (p.getProximo() == null){
-            p.getAnt().setProximo(null);
-            fim = p.getAnt();
-        } else {
-            p.getAnt().setProximo(p.getProximo());
-            p.getProximo().setAnt(p.getAnt());
+        Noh ant = null, p;
+        p = inicio;
+        while (p != null && p.getValor() != valor) {
+            ant = p;
+            p = p.getProximo();
         }
+        if (p == null) {
+            return false;
+        }
+        if (ant == null) {
+            inicio = p.getProximo();
+        } else {
+            ant.setProximo(p.getProximo());
+        }
+        contElementos--;
         return true;
     }
 
-    public boolean busca(Object valor){
-        Noh p = inicio;
-        while (p!=null && p.getValor()!=valor) {
-           p = p.getProximo();
-        }
-        if (p == null){
-            return false;
-        }
-        return true;
-    }
     @Override
     public int tamanho() {
         return contElementos;
@@ -89,18 +79,4 @@ public class LDE implements ILista {
         }
         return stringBuilder.toString();
     }
-    public String imprimeInverso() {
-        int j = 0;
-        final StringBuilder stringBuilder = new StringBuilder();
-        estahVazia();
-        for (Noh i = fim; i != null; i = i.getAnt()) {
-            j++;
-            stringBuilder.append("Elemento " + j + ": ");
-            stringBuilder.append(i.getValor());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
 }
-
-

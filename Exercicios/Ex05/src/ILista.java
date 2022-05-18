@@ -8,4 +8,5 @@ public interface ILista {
     public boolean remove(Object valor);
 
     public int tamanho();
+    public String imprime();
 }
