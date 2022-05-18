@@ -37,6 +37,6 @@ public class Aluno {
     public String toString() {
         return "Nome = " + nome +
                 " Idade = " + idade +
-                " Nota = " + nota + "\n";
+                " Nota = " + nota;
     }
 }

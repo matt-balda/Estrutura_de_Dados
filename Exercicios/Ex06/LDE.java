@@ -1,6 +1,7 @@
 public class LDE implements ILista {
     private Noh inicio;
     private Noh fim;
+    private Noh p;
     private int contElementos;
 
     public LDE() {
@@ -44,10 +45,15 @@ public class LDE implements ILista {
         }
         return false;
     }
+    public boolean estahVaziaInverso(){
+        for (Noh i = fim; i == null; i = i.getAnt()){
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean remove(Object valor) {
-        Noh p = inicio;
         busca(valor);
         if (p.getAnt() == null){
             inicio = p.getProximo();
@@ -59,11 +65,12 @@ public class LDE implements ILista {
             p.getAnt().setProximo(p.getProximo());
             p.getProximo().setAnt(p.getAnt());
         }
+        contElementos--;
         return true;
     }
 
     public boolean busca(Object valor){
-        Noh p = inicio;
+        p = inicio;
         while (p!=null && p.getValor()!=valor) {
            p = p.getProximo();
         }
@@ -80,24 +87,26 @@ public class LDE implements ILista {
     public String imprime() {
         int j = 0;
         final StringBuilder stringBuilder = new StringBuilder();
-        estahVazia();
-        for (Noh i = inicio; i != null; i = i.getProximo()) {
-            j++;
-            stringBuilder.append("Elemento " + j + ": ");
-            stringBuilder.append(i.getValor());
-            stringBuilder.append("\n");
+        if (!estahVazia()) {
+            for (Noh i = inicio; i != null; i = i.getProximo()) {
+                j++;
+                stringBuilder.append("Elemento " + j + ": ");
+                stringBuilder.append(i.getValor());
+                stringBuilder.append("\n");
+            }
         }
         return stringBuilder.toString();
     }
     public String imprimeInverso() {
         int j = 0;
         final StringBuilder stringBuilder = new StringBuilder();
-        estahVazia();
-        for (Noh i = fim; i != null; i = i.getAnt()) {
-            j++;
-            stringBuilder.append("Elemento " + j + ": ");
-            stringBuilder.append(i.getValor());
-            stringBuilder.append("\n");
+        if (!estahVaziaInverso()) {
+            for (Noh i = fim; i != null; i = i.getAnt()) {
+                j++;
+                stringBuilder.append("Elemento " + j + ": ");
+                stringBuilder.append(i.getValor());
+                stringBuilder.append("\n");
+            }
         }
         return stringBuilder.toString();
     }
