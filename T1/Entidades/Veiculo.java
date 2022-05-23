@@ -8,6 +8,15 @@ public class Veiculo {
     private int potencia;
     private int numDeLugares;
 
+    public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int numDeLugares) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.ano = ano;
+        this.potencia = potencia;
+        this.numDeLugares = numDeLugares;
+    }
+
     public String getPlaca() {
         return placa;
     }
@@ -54,5 +63,15 @@ public class Veiculo {
 
     public void setNumDeLugares(int numDeLugares) {
         this.numDeLugares = numDeLugares;
+    }
+
+    @Override
+    public String toString() {
+        return "Placa: "+ placa +
+                " | Modelo: " + modelo +
+                " | Marca: " + marca +
+                " | Ano: " + ano +
+                " | Potencia: " + potencia +
+                " | Número de Lugares: " + numDeLugares;
     }
 }

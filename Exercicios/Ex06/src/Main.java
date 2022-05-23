@@ -4,30 +4,30 @@ public class Main {
          Instanciação da lista duplamente encadeada genérica, aluno e declaração de variáveis
          */
         LDE lista = new LDE();
-        int elemento1 = 100;
-        int elemento2 = 95;
-        int elemento3 = 23;
-        Aluno a1 = new Aluno("Mateus", 18, 10);
+//        int elemento1 = 100;
+//        int elemento2 = 95;
+//        int elemento3 = 23;
+//        Aluno a1 = new Aluno("Mateus", 18, 10);
         Aluno a2 = new Aluno("Gabriel", 22, 9);
 
         /**
          * Insere no inicio
          */
-        lista.insereInicio(5);
-        lista.insereInicio(30);
-        lista.insereInicio(elemento1);
-        lista.insereInicio(a1);
+//        lista.insereInicio(5);
+//        lista.insereInicio(30);
+//        lista.insereInicio(elemento1);
+//        lista.insereInicio(a1);
         lista.insereInicio(a2);
-        lista.insereInicio(elemento3);
+//        lista.insereInicio(elemento3);
         /**
          * Insere no fim
          */
-        lista.insereFim(15);
-        lista.insereFim(elemento2);
+//        lista.insereFim(15);
+//        lista.insereFim(elemento2);
         /**
          * Remove um elemento
          */
-        System.out.println("Removeu: " + lista.remove(elemento2));
+        System.out.println("Removeu: " + lista.remove(a2));
         /**
          * Verifica se a lista está vazia
          */
@@ -46,6 +46,6 @@ public class Main {
         /**
          * Busca um elemento em especifico
          */
-        System.out.printf("Buscou: "+lista.busca(a1));
+        //System.out.printf("Buscou: "+lista.busca(a1));
     }
 }
