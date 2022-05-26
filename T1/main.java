@@ -1,3 +1,4 @@
+import Entidades.Veiculo;
 import Listas.LDEVeiculos;
 import UI.UIVeiculo;
 

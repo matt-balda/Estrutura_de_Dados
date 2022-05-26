@@ -1,12 +1,11 @@
 package UI;
 
+import Arquivo.Arquivo1;
 import Arquivo.Arquivo2;
 import Entidades.Veiculo;
 import Listas.LDEVeiculos;
-import Listas.NohVeiculos;
 
-import javax.sound.midi.Soundbank;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.io.File;
 import java.util.Scanner;
 
 public class UIVeiculo {
@@ -17,6 +16,13 @@ public class UIVeiculo {
     }
 
     public void menuGerenciarVeiculos() {
+        if(new File("Veiculos.csv").exists()){
+            try{
+                lista = new Arquivo1().loader("Veiculos.csv");
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
         Scanner sc = new Scanner(System.in);
         int opcao = 0;
         do{

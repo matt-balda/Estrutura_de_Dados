@@ -2,7 +2,9 @@ package Listas;
 
 import Entidades.Veiculo;
 
-public class NohVeiculos {
+import java.io.Serializable;
+
+public class NohVeiculos implements Serializable {
     private Veiculo valor;
     private NohVeiculos ant;
     private NohVeiculos proximo;

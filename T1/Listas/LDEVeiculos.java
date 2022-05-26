@@ -3,7 +3,9 @@ package Listas;
 import Entidades.Veiculo;
 import Interfaces.ILista;
 
-public class LDEVeiculos implements ILista {
+import java.io.Serializable;
+
+public class LDEVeiculos implements ILista, Serializable {
     private NohVeiculos inicio;
     private NohVeiculos fim;
     private NohVeiculos p;

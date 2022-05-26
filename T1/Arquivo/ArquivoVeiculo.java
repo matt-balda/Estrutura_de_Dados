@@ -15,9 +15,8 @@ public class ArquivoVeiculo {
 //
 //    }
 
-    public void run() {
+    public static void run(String arquivoCSV) {
 
-        String arquivoCSV = "Veiculos.csv";
         BufferedReader br = null;
         String linha = "";
         String csvDivisor = ";";

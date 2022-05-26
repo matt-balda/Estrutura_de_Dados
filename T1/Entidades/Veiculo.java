@@ -1,6 +1,8 @@
 package Entidades;
 
-public class Veiculo {
+import java.io.Serializable;
+
+public class Veiculo implements Serializable {
     private String placa;
     private String modelo;
     private String marca;
@@ -15,6 +17,9 @@ public class Veiculo {
         this.ano = ano;
         this.potencia = potencia;
         this.numDeLugares = numDeLugares;
+    }
+    public Veiculo(){
+
     }
 
     public String getPlaca() {
