@@ -9,16 +9,19 @@ public class Veiculo implements Serializable {
     private int ano;
     private int potencia;
     private int numDeLugares;
+    private Categoria categoria;
 
-    public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int numDeLugares) {
+    public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int numDeLugares, Categoria categoria) {
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
         this.potencia = potencia;
         this.numDeLugares = numDeLugares;
+        this.categoria = categoria;
     }
-    public Veiculo(){
+
+    public Veiculo() {
 
     }
 
@@ -70,13 +73,22 @@ public class Veiculo implements Serializable {
         this.numDeLugares = numDeLugares;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
-        return "Placa: "+ placa +
+        return "Placa: " + placa +
                 " | Modelo: " + modelo +
                 " | Marca: " + marca +
                 " | Ano: " + ano +
                 " | Potencia: " + potencia +
-                " | Número de Lugares: " + numDeLugares;
+                " | Número de Lugares: " + numDeLugares+
+                " | Categoria: " + categoria;
     }
 }

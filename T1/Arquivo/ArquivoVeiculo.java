@@ -1,49 +1,36 @@
 package Arquivo;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import Entidades.Categoria;
+import Entidades.Veiculo;
+import Listas.LDECategorias;
+import Listas.LDEVeiculos;
+
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class ArquivoVeiculo {
+    private static Scanner input;
+    private static LDEVeiculos valores = new LDEVeiculos();
 
-
-//    public static void main(String[] args) {
-//
-//        ArquivoVeiculo obj = new ArquivoVeiculo();
-//        obj.run();
-//
-//    }
-
-    public static void run(String arquivoCSV) {
-
-        BufferedReader br = null;
-        String linha = "";
-        String csvDivisor = ";";
+    public LDEVeiculos carregarCsvVeiculos(String file) {
         try {
-
-            br = new BufferedReader(new FileReader(arquivoCSV));
-            while ((linha = br.readLine()) != null) {
-
-                String[] veiculo = linha.split(csvDivisor);
-
-                String formato = String.format("Placa %s |Modelo: %s |Marca: %s |Ano: %s |Potencia: %s |Lugares: %s |Categoria: %s", veiculo[0], veiculo[1], veiculo[2], veiculo[3], veiculo[4], veiculo[5], veiculo[6]);
-
-                System.out.println(formato);
+            input = new Scanner(Paths.get(file));
+            input.nextLine();
+            while (input.hasNext()) {
+                String[] data = input.nextLine().split(";");
+                Veiculo dados = new Veiculo();
+                dados.setPlaca(data[0]);
+                dados.setModelo(data[1]);
+                dados.setMarca(data[2]);
+                dados.setAno(Integer.parseInt(data[3]));
+                dados.setPotencia(Integer.parseInt(data[4]));
+                dados.setNumDeLugares(Integer.parseInt(data[5]));
+                dados.setCategoria(LDECategorias.INSTANCE.buscaIdObj(Integer.parseInt(data[6])));
+                valores.insereInicio(dados);
             }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+        return valores;
     }
 }

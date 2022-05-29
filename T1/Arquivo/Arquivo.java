@@ -6,11 +6,11 @@ import Listas.LDEVeiculos;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class Arquivo1 {
-    private static Scanner input;
+public class Arquivo {
+    private static Scanner input ;
     private static LDEVeiculos valores = new LDEVeiculos();
 
-    public LDEVeiculos loader(String file){
+    public LDEVeiculos carregarCsv(String file){
         try {
             input = new Scanner(Paths.get(file));
             input.nextLine();

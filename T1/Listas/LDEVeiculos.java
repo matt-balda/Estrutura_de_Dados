@@ -1,20 +1,23 @@
 package Listas;
 
 import Entidades.Veiculo;
-import Interfaces.ILista;
+import Interfaces.IVeiculo;
+import Noh.NohVeiculos;
 
 import java.io.Serializable;
 
-public class LDEVeiculos implements ILista, Serializable {
+public class LDEVeiculos implements IVeiculo, Serializable {
     private NohVeiculos inicio;
     private NohVeiculos fim;
     private NohVeiculos p;
     private Veiculo v;
+    public static LDEVeiculos INSTANCE;
     private int contElementos;
 
     public LDEVeiculos() {
         this.inicio = null;
         this.fim = null;
+        INSTANCE = this;
     }
 
     @Override
