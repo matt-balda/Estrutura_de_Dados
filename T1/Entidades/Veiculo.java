@@ -2,6 +2,12 @@ package Entidades;
 
 import java.io.Serializable;
 
+/**
+ * Classe que permite acessos e modificações nos atributos do veiculo
+ * @author Mateus Balda
+ * @date 21/05/2022
+ * @since 1.0
+ */
 public class Veiculo implements Serializable {
     private String placa;
     private String modelo;

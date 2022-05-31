@@ -1,9 +1,8 @@
 package UI;
 
-import Arquivo.ArquivoCatg;
 import Entidades.Categoria;
 import Listas.LDECategorias;
-import java.io.File;
+import Listas.LDEVeiculos;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -62,13 +61,14 @@ public class UICategoria {
 
         System.out.print("ID: ");
         id = sc.nextInt();
+        sc.nextLine();
         System.out.print("Nome: ");
         nome = sc.nextLine();
 
         Categoria cat = new Categoria(nome, id);
-        LDECategorias.INSTANCE.insereInicio(cat);
+        LDECategorias.INSTANCE.insereFim(cat);
 
-        System.out.println("Categoria cadastrado.");
+        System.out.println("Categoria cadastrada com sucesso!");
     }
 
     public void alterar () {
@@ -88,6 +88,7 @@ public class UICategoria {
             System.out.print("ID: ");
             id = sc.nextInt();
             categoria.setId(id);
+            sc.nextLine();
             System.out.print("Nome: ");
             nome = sc.nextLine();
             categoria.setNome(nome);
@@ -97,18 +98,21 @@ public class UICategoria {
     public void excluir () {
         Scanner sc = new Scanner(System.in);
         int id;
-        Categoria cat;
 
         System.out.print("Digite o id da categoria: ");
         id = sc.nextInt();
-        cat = LDECategorias.INSTANCE.buscaIdObj(id);
+        categoria = LDECategorias.INSTANCE.buscaIdObj(id);
 
         if (!LDECategorias.INSTANCE.existe(id)) {
             System.err.println("\nCategoria não encontrada.");
         } else {
-            System.out.println(cat.toString());
-            LDECategorias.INSTANCE.remove(cat);
-            System.out.println("Categoria removida com sucesso.");
+            System.out.println(categoria.toString());
+            if (LDEVeiculos.INSTANCE.existeCategoria(id)) {
+                System.out.println("Categoria não pode ser removida!");
+            } else {
+                LDECategorias.INSTANCE.remove(categoria);
+                System.out.println("Categoria removida com sucesso.");
+            }
         }
     }
     public void listarReverso () {

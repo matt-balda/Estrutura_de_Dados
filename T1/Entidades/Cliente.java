@@ -1,5 +1,11 @@
 package Entidades;
 
+/**
+ * Classe que permite acessos e modificações nos atributos do cliente
+ * @author Lara Souto
+ * @date 21/05/2022
+ * @since 1.0
+ */
 public class Cliente {
     private String nome;
     private long cnh;
@@ -51,11 +57,9 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "Nome='" + nome + '\'' +
-                ", CNH=" + cnh +
-                ", CPF=" + cpf +
-                ", Telefone=" + telefone +
-                '}';
+        return  "Nome: " + nome +
+                " | CNH: " + cnh +
+                " | CPF: " + cpf +
+                " | Telefone: " + telefone;
     }
 }

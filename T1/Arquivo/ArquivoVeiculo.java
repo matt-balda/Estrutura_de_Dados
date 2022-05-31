@@ -1,17 +1,25 @@
 package Arquivo;
 
-import Entidades.Categoria;
 import Entidades.Veiculo;
 import Listas.LDECategorias;
 import Listas.LDEVeiculos;
-
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Classe que permite a manipulação de arquivos csv.
+ * @author Mateus Balda
+ * @date 24/05/2022
+ * @since 2.0
+ */
 public class ArquivoVeiculo {
     private static Scanner input;
-    private static LDEVeiculos valores = new LDEVeiculos();
 
+    /**
+     * Método que permite o carregando do arquivo csv
+     * @param file String a ser inserido
+     * @return objeto LDE de veículos
+     */
     public LDEVeiculos carregarCsvVeiculos(String file) {
         try {
             input = new Scanner(Paths.get(file));
@@ -26,11 +34,11 @@ public class ArquivoVeiculo {
                 dados.setPotencia(Integer.parseInt(data[4]));
                 dados.setNumDeLugares(Integer.parseInt(data[5]));
                 dados.setCategoria(LDECategorias.INSTANCE.buscaIdObj(Integer.parseInt(data[6])));
-                valores.insereInicio(dados);
+                LDEVeiculos.INSTANCE.insereInicio(dados);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return valores;
+        return LDEVeiculos.INSTANCE;
     }
 }

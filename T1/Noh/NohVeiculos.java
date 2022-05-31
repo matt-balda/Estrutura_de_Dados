@@ -1,7 +1,6 @@
 package Noh;
 
 import Entidades.Veiculo;
-
 import java.io.Serializable;
 
 public class NohVeiculos implements Serializable {
@@ -39,10 +38,23 @@ public class NohVeiculos implements Serializable {
         this.proximo = proximo;
     }
 
-    public String getPlaca(){
+    public String getPlaca() {
         return valor.getPlaca();
     }
-    public String toStringVeiculo(){
+
+    public int getPotencia() {
+        return valor.getPotencia();
+    }
+
+    public int getNumDeLugares() {
+        return valor.getNumDeLugares();
+    }
+
+    public String toStringVeiculo() {
         return valor.toString();
+    }
+
+    public int getRestricaoId() {
+        return valor.getCategoria().getId();
     }
 }

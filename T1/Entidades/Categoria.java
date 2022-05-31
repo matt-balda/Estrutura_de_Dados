@@ -1,9 +1,14 @@
 package Entidades;
 
+/**
+ * Classe que permite acessos e modificações nos atributos da categoria
+ * @author Wellyngton Wilton
+ * @date 21/05/2022
+ * @since 1.0
+ */
 public class Categoria {
     private String nome;
     private int id;
-
 
     public Categoria(String nome, int id) {
         this.nome = nome;
@@ -31,9 +36,9 @@ public class Categoria {
         this.nome = nome;
     }
 
-
     @Override
     public String toString() {
-        return ("Id: " + id + " |Nome: " + nome);
+        return ("Id: " + id +
+                " | Nome: " + nome);
     }
 }

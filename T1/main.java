@@ -13,9 +13,9 @@ import java.text.ParseException;
 
 public class main {
     public static void main(String[] args) throws IOException, ParseException {
+        LDECategorias.INSTANCE = new LDECategorias();
         LDEVeiculos.INSTANCE = new LDEVeiculos();
         LDEClientes.INSTANCE = new LDEClientes();
-        LDECategorias.INSTANCE = new LDECategorias();
         LDELocacoes.INSTANCE = new LDELocacoes();
 
         if (new File("Categoria.csv").exists()) {

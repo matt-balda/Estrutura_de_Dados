@@ -1,7 +1,12 @@
 package Entidades;
 
 import java.util.Date;
-
+/**
+ * Classe que permite acessos e modificações nos atributos da locacao
+ * @author Lara Souto, Mateus Balda, Wellyngton Wilton
+ * @date 24/05/2022
+ * @since 1.0
+ */
 public class Locacao {
     private static int numeroGeral = 1000;
     private int codLocacao;
@@ -81,13 +86,11 @@ public class Locacao {
 
     @Override
     public String toString() {
-        return "Locacao{" +
-                "codLocacao=" + codLocacao +
-                ", valorDiaria=" + valorDiaria +
-                ", dataInicial=" + dataInicial +
-                ", dataFinal=" + dataFinal +
-                ", cliente=" + cliente +
-                ", veiculo=" + veiculo +
-                '}';
+        return  "Código da locacao: " + codLocacao +
+                " | Valor da diária: " + valorDiaria +
+                " | Data Inicial: " + dataInicial +
+                " | Data Final: " + dataFinal +
+                " | Cliente: " + cliente +
+                " | Veiculo: " + veiculo;
     }
 }

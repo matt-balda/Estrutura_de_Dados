@@ -1,9 +1,5 @@
 package UI;
 
-import Listas.LDECategorias;
-import Listas.LDEClientes;
-import Listas.LDEVeiculos;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -18,14 +14,14 @@ public class UILocadora {
         UILocacao uiLocacao = new UILocacao();
         int op;
         do {
-            System.out.println("|||||||||||||||||||||||||||||||||||");
-            System.out.println("||||   Bem-vindo a PampaLoca   ||||");
-            System.out.println("||||   1 - Menu veículos       ||||");
-            System.out.println("||||   2 - Menu clientes       ||||");
-            System.out.println("||||   3 - Menu categoria      ||||");
-            System.out.println("||||   4 - Menu locação        ||||");
-            System.out.println("||||   0 - Para sair           ||||");
-            System.out.println("|||||||||||||||||||||||||||||||||||");
+            System.out.println("---------------------------------");
+            System.out.println("      Bem-vindo a PampaLoca");
+            System.out.println("      1 - Menu veículos");
+            System.out.println("      2 - Menu clientes");
+            System.out.println("      3 - Menu categoria");
+            System.out.println("      4 - Menu locação");
+            System.out.println("      0 - Para sair");
+            System.out.println("---------------------------------");
             System.out.print("Sua opção: ");
             op = sc.nextInt();
             switch (op) {

@@ -46,4 +46,9 @@ public class NohLocacoes {
     public String getRestricaoCpf(){
         return valor.getCliente().getCpf();
     }
+    public String getRestricaoPlaca(){
+        return valor.getVeiculo().getPlaca();
+    }
+    public String getRestricaoLocacao(){ return valor.getVeiculo().getPlaca();}
+
 }

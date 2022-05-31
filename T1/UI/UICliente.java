@@ -3,12 +3,12 @@ package UI;
 import Entidades.Cliente;
 import Listas.LDEClientes;
 import Listas.LDELocacoes;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class UICliente {
+    private Cliente c;
 
     public UICliente() {
 
@@ -73,20 +73,24 @@ public class UICliente {
             telefone = sc.nextLong();
 
             Cliente c1 = new Cliente(nome, cpf, cnh, telefone);
-            LDEClientes.INSTANCE.insereClienteInicio(c1);
+            LDEClientes.INSTANCE.insereClienteFim(c1);
 
-            System.out.println("Cliente cadastrado.");
+            System.out.println("Cliente cadastrado com sucesso.");
         }
         public void consultar () {
             Scanner sc = new Scanner(System.in);
             String cpf;
             System.out.print("Digite o cpf do cliente: ");
             cpf = sc.nextLine();
-            System.out.println(LDEClientes.INSTANCE.buscaCpf(cpf));
+            if(LDEClientes.INSTANCE.existeCliente(cpf)) {
+                System.out.println(LDEClientes.INSTANCE.buscaCpf(cpf));
+            }
+            else{
+                System.err.println("Cliente não encontrado!");
+            }
         }
         public void alterar () {
             Scanner sc = new Scanner(System.in);
-            Cliente c;
             String nome, cpf;
             long cnh, telefone;
             System.out.print("Digite o cpf do cliente a ser consultado: ");
@@ -116,7 +120,6 @@ public class UICliente {
         public void excluir () {
             Scanner sc = new Scanner(System.in);
             String cpf;
-            Cliente c;
 
             System.out.print("Digite o cpf do cliente: ");
             cpf = sc.nextLine();

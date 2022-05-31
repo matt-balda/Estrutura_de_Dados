@@ -1,19 +1,18 @@
 package Listas;
 
+import Interfaces.ILocacao;
 import Entidades.Categoria;
-import Entidades.Cliente;
 import Entidades.Locacao;
 import Noh.NohLocacoes;
+import Noh.NohVeiculos;
 
-
-public class LDELocacoes {
+public class LDELocacoes implements ILocacao {
     private NohLocacoes inicio;
     private NohLocacoes fim;
     private NohLocacoes p;
     private Locacao loc;
     private Categoria categoria;
     public static LDELocacoes INSTANCE;
-    private int totalInfo;
 
 
     public LDELocacoes() {
@@ -32,7 +31,6 @@ public class LDELocacoes {
             inicio.setAnt(novo);
             inicio = novo;
         }
-        totalInfo++;
     }
 
     public void insereFim(Locacao info) {
@@ -44,7 +42,6 @@ public class LDELocacoes {
             fim.setProximo(novo);
             fim = novo;
         }
-        totalInfo++;
     }
 
     public boolean busca(Locacao info) {
@@ -64,7 +61,9 @@ public class LDELocacoes {
         }
         if (p.getAnt() == null) {
             inicio = p.getProximo();
-            inicio.setAnt(null);
+            if (inicio != null) {
+                inicio.setAnt(null);
+            }
         } else if (p.getProximo() == null) {
             p.getAnt().setProximo(null);
             fim = p.getAnt();
@@ -72,7 +71,7 @@ public class LDELocacoes {
             p.getAnt().setProximo(p.getProximo());
             p.getProximo().setAnt(p.getAnt());
         }
-        totalInfo--;
+        veiculosNaoLocados(LDEVeiculos.INSTANCE).insereFim(info.getVeiculo());
         return true;
     }
 
@@ -88,33 +87,12 @@ public class LDELocacoes {
         }
     }
 
-    public int tamanho() {
-        return this.totalInfo;
-    }
-
-    public boolean estahVazia(Cliente info) {
+    public boolean estahVazia(Locacao info) {
         if (inicio == null) {
             return true;
         } else {
             return false;
         }
-    }
-    public String buscaCodLocacao(int cod) {
-        for (NohLocacoes i = inicio; i != null; i = i.getProximo()) {
-            if (i.getCodLocacao() == cod) {
-                return i.toStringLocacao();
-            }
-        }
-        return null;
-    }
-    public Locacao buscaCodLocacaoObj(int cod){
-        for (NohLocacoes i = inicio; i != null; i = i.getProximo()){
-            if (i.getCodLocacao() == cod) {
-                loc = i.getValor();
-                return loc;
-            }
-        }
-        return null;
     }
 
     public boolean existeCliente(String cpf){
@@ -125,12 +103,50 @@ public class LDELocacoes {
         }
         return false;
     }
-//    public boolean existeVeiculo(String cpf){
-//        for (NohLocacoes i = inicio; i != null; i = i.getProximo()){
-//            if (i.getCpf().equals(cpf)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean existeVeiculo(String placa){
+        for (NohLocacoes i = inicio; i != null; i = i.getProximo()){
+            if (i.getRestricaoPlaca().equals(placa)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeLocacao(String placa){
+        for (NohLocacoes i = inicio; i != null; i = i.getProximo()){
+            if (i.getRestricaoLocacao().equals(placa)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public Locacao buscaPlacaLoc(String placa){
+        for (NohLocacoes i = inicio; i != null; i = i.getProximo()){
+            if (i.getRestricaoLocacao().equals(placa)) {
+                loc = i.getValor();
+                return loc;
+            }
+        }
+        return null;
+    }
+    public LDEVeiculos veiculosNaoLocados(LDEVeiculos veiculos){
+        LDEVeiculos naoLocados = new LDEVeiculos();
+        for (NohVeiculos veiculo =veiculos.getInicio();veiculo!=null;veiculo=veiculo.getProximo()) {
+            boolean locado = false;
+            for (NohLocacoes i = inicio; i != null; i = i.getProximo()) {
+                if (veiculo.getPlaca().equals(i.getRestricaoPlaca())) {
+                    locado = true;
+                }
+            }
+            if (!locado) {
+                if (naoLocados.estahVazia()) {
+                    naoLocados.insereInicio(veiculo.getValor());
+                } else {
+                    naoLocados.insereFim(veiculo.getValor());
+                }
+            }
+        }
+        return naoLocados;
+    }
+
 }

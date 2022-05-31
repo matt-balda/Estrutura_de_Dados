@@ -20,9 +20,6 @@ public class UILocacao {
     private Locacao locacao;
 
     public UILocacao() {
-        this.cliente = cliente;
-        this.veiculo = veiculo;
-        this.locacao = new Locacao();
     }
 
     public void menuGerenciarLocacoes() throws IOException, ParseException {
@@ -43,6 +40,7 @@ public class UILocacao {
                     locarVeiculo();
                     break;
                 case 2:
+                    devolverVeiculo();
                     break;
                 case 3:
                     listar();
@@ -60,6 +58,7 @@ public class UILocacao {
     }
 
     public void locarVeiculo() throws ParseException {
+       // LDELocacoes.INSTANCE.veiculosNaoLocados();
         Scanner sc = new Scanner(System.in);
         String cpf, placa;
         Date dataInicial = null, dataFinal = null;
@@ -72,18 +71,21 @@ public class UILocacao {
         System.out.print("Digite o CPF do cliente: ");
         cpf = sc.nextLine();
         cliente = LDEClientes.INSTANCE.buscaCpfObj(cpf);
-        if (!LDEClientes.INSTANCE.existeCliente(cpf)) {
-            System.err.println("\nO cliente não foi encontrado!");
-        } else {
-            System.out.println(cliente.toString());
-        }
-        System.out.println(LDEVeiculos.INSTANCE.imprime());
+            if (!LDEClientes.INSTANCE.existeCliente(cpf)) {
+                System.err.println("\nO cliente não foi encontrado!");
+                return;
+            } else {
+                System.out.println(cliente.toString());
+            }
+        //System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.println(LDELocacoes.INSTANCE.veiculosNaoLocados(LDEVeiculos.INSTANCE).imprime());
         System.out.println();
         System.out.print("Digite a placa do veículo: ");
         placa = sc.nextLine();
         veiculo = LDEVeiculos.INSTANCE.buscaPlacaObj(placa);
         if (!LDEVeiculos.INSTANCE.existe(placa)) {
             System.err.println("\nO veículo não foi encontrado!");
+            return;
         } else {
             System.out.println(veiculo.toString());
         }
@@ -108,6 +110,26 @@ public class UILocacao {
         System.out.println("Locação criada com sucesso!");
     }
 
+    public void devolverVeiculo() {
+        Scanner sc = new Scanner(System.in);
+        String placa;
+
+        LDEVeiculos.INSTANCE.imprime();
+        System.out.println();
+        System.out.print("Digite a placa do veículo: ");
+        placa = sc.nextLine();
+        locacao = LDELocacoes.INSTANCE.buscaPlacaLoc(placa);
+
+        System.out.println(locacao.toString());
+        if (!LDELocacoes.INSTANCE.existeLocacao(placa)) {
+            System.err.println("\nA locação não foi encontrada!");
+        } else {
+            LDELocacoes.INSTANCE.remove(locacao);
+            System.out.println("Locacao removida com sucesso.");
+        }
+    }
+
+
     public void listar() {
         LDELocacoes.INSTANCE.imprime();
     }
@@ -121,15 +143,26 @@ public class UILocacao {
             System.out.println("1 - Listar por potência");
             System.out.println("2 - Listar por número de lugares");
             System.out.println("3 - Listar por categoria");
+            System.out.println("4 - Listar por potencia e categoria");
+            System.out.println("5 - Listar por número de lugares e categoria");
             System.out.println("0 - Voltar ");
             System.out.print("Sua opção: ");
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
+                    filtroPotencia();
                     break;
                 case 2:
+                    filtroNLugares();
                     break;
                 case 3:
+                    filtroCategoria();
+                    break;
+                case 4:
+                    filtroPotenciaECategoria();
+                    break;
+                case 5:
+                    filtroNLugaresECategoria();
                     break;
                 case 0:
                     return;
@@ -138,5 +171,51 @@ public class UILocacao {
             }
         } while (opcao != 0);
     }
-}
 
+    public void filtroPotencia() {
+        Scanner sc = new Scanner(System.in);
+        int potencia;
+        System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.print("Digite a potencia dos veículos: ");
+        potencia = sc.nextInt();
+        System.out.println(LDEVeiculos.INSTANCE.buscaPotencia(potencia));
+    }
+    public void filtroNLugares() {
+        Scanner sc = new Scanner(System.in);
+        int nLugares;
+        System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.print("Digite o número de lugares dos veículos: ");
+        nLugares = sc.nextInt();
+        System.out.println(LDEVeiculos.INSTANCE.buscaNLugares(nLugares));
+    }
+
+    public void filtroCategoria() {
+        Scanner sc = new Scanner(System.in);
+        int id;
+        System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.print("Digite o id da categoria do veículo: ");
+        id = sc.nextInt();
+        System.out.println(LDEVeiculos.INSTANCE.buscaCategoria(id));
+    }
+
+    public void filtroPotenciaECategoria(){
+        Scanner sc = new Scanner(System.in);
+        int id, potencia;
+        System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.print("Digite a potência dos veículos: ");
+        potencia = sc.nextInt();
+        System.out.print("Digite o id da categoria dos veículos: ");
+        id = sc.nextInt();
+        System.out.println(LDEVeiculos.INSTANCE.buscaPotenciaECategoria(potencia,id));
+    }
+    public void filtroNLugaresECategoria(){
+        Scanner sc = new Scanner(System.in);
+        int id, nLugares;
+        System.out.println(LDEVeiculos.INSTANCE.imprime());
+        System.out.print("Digite o número de lugares: ");
+        nLugares = sc.nextInt();
+        System.out.print("Digite o id da categoria dos veículos: ");
+        id = sc.nextInt();
+        System.out.println(LDEVeiculos.INSTANCE.buscaNLugaresECategoria(nLugares, id));
+    }
+}

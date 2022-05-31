@@ -1,18 +1,18 @@
 package UI;
 
-import Arquivo.ArquivoCatg;
-import Arquivo.ArquivoVeiculo;
 import Entidades.Categoria;
 import Entidades.Veiculo;
 import Listas.LDECategorias;
+import Listas.LDELocacoes;
 import Listas.LDEVeiculos;
-import java.io.File;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class UIVeiculo {
     private Categoria categoria;
+    private Veiculo veiculo;
 
     public UIVeiculo() {
     }
@@ -84,14 +84,14 @@ public class UIVeiculo {
         System.out.print("Categoria: ");
         idCat = sc.nextInt();
         categoria = LDECategorias.INSTANCE.buscaIdObj(idCat);
-        if (!LDECategorias.INSTANCE.existe(idCat)){
-            System.out.println("\n Categoria não encontrada!");
-        }else{
+        if (!LDECategorias.INSTANCE.existe(idCat)) {
+            System.err.println("\n Categoria não encontrada!");
+        } else {
             System.out.println(categoria.getNome());
         }
 
         Veiculo v1 = new Veiculo(placa, modelo, marca, ano, potencia, numDeLugares, categoria);
-        LDEVeiculos.INSTANCE.insereInicio(v1);
+        LDEVeiculos.INSTANCE.insereFim(v1);
 
         System.out.println("Veículo cadastrado com sucesso!");
     }
@@ -101,66 +101,90 @@ public class UIVeiculo {
         String placa;
         System.out.print("Digite a placa do veículo a ser pesquisado: ");
         placa = sc.nextLine();
-        System.out.println(LDEVeiculos.INSTANCE.buscaPlaca(placa));
+        if (LDEVeiculos.INSTANCE.existe(placa)) {
+            System.out.println(LDEVeiculos.INSTANCE.buscaPlaca(placa));
+        } else {
+            System.err.println("Veículo não encontrado!");
+        }
     }
 
     public void alterar() {
         Scanner sc = new Scanner(System.in);
-        Veiculo v;
         String placa, modelo, marca;
-        int ano, potencia, numDeLugares;
+        int ano, potencia, numDeLugares, idCat, op = 0;
         System.out.print("Digite a placa do veículo a ser pesquisado: ");
         placa = sc.nextLine();
-        v = LDEVeiculos.INSTANCE.buscaPlacaObj(placa);
+        veiculo = LDEVeiculos.INSTANCE.buscaPlacaObj(placa);
 
         if (!LDEVeiculos.INSTANCE.existe(placa)) {
             System.err.println("\nO veículo não foi encontrado!");
         } else {
-            System.out.println("Veículo localizado:\n Placa: " + v.getPlaca() + " Marca: " + v.getMarca());
+            System.out.println("Veículo localizado:\n Placa: " + veiculo.getPlaca() + " Marca: " + veiculo.getMarca());
 
-            System.out.print("Placa: ");
-            placa = sc.nextLine();
-            v.setPlaca(placa);
-            System.out.print("Modelo: ");
-            modelo = sc.nextLine();
-            v.setModelo(modelo);
-            System.out.print("Marca: ");
-            marca = sc.nextLine();
-            v.setMarca(marca);
-            System.out.print("Ano: ");
-            ano = sc.nextInt();
-            v.setAno(ano);
-            System.out.print("Potência: ");
-            potencia = sc.nextInt();
-            v.setPotencia(potencia);
-            System.out.print("Número de lugares: ");
-            numDeLugares = sc.nextInt();
-            v.setNumDeLugares(numDeLugares);
-
+            System.out.println("Qual item deseja alterar: 1.Placa | 2.Modelo | 3.Marca | 4.Ano" +
+                    " | 5.Potência | 6.Número de lugares | 7.Categoria");
+            System.out.print("- ");
+            op = sc.nextInt();
+            if (op == 1) {
+                sc.nextLine();
+                System.out.print("Placa: ");
+                placa = sc.nextLine();
+                veiculo.setPlaca(placa);
+            } else if (op == 2) {
+                sc.nextLine();
+                System.out.print("Modelo: ");
+                modelo = sc.nextLine();
+                veiculo.setModelo(modelo);
+            } else if (op == 3) {
+                sc.nextLine();
+                System.out.print("Marca: ");
+                marca = sc.nextLine();
+                veiculo.setMarca(marca);
+            } else if (op == 4) {
+                System.out.print("Ano: ");
+                ano = sc.nextInt();
+                veiculo.setAno(ano);
+            } else if (op == 5) {
+                System.out.print("Potência: ");
+                potencia = sc.nextInt();
+                veiculo.setPotencia(potencia);
+            } else if (op == 6) {
+                System.out.print("Número de lugares: ");
+                numDeLugares = sc.nextInt();
+                veiculo.setNumDeLugares(numDeLugares);
+            } else if (op == 7) {
+                LDECategorias.INSTANCE.imprime();
+                System.out.print("Digite o id da Categoria: ");
+                idCat = sc.nextInt();
+                veiculo.setCategoria(LDECategorias.INSTANCE.buscaIdObj(idCat));
+            }
         }
-        System.out.println("Veículo alterado com sucesso: " + v.toString());
+        System.out.println("Veículo alterado com sucesso: " + veiculo.toString());
     }
 
     public void excluir() {
         Scanner sc = new Scanner(System.in);
         String placa;
-        Veiculo v;
 
         System.out.print("Digite a placa do veículo a ser pesquisado: ");
         placa = sc.nextLine();
-        v = LDEVeiculos.INSTANCE.buscaPlacaObj(placa);
+        veiculo = LDEVeiculos.INSTANCE.buscaPlacaObj(placa);
 
         if (!LDEVeiculos.INSTANCE.existe(placa)) {
             System.err.println("\nO veículo não foi encontrado!");
         } else {
-            System.out.println(v.toString());
-            LDEVeiculos.INSTANCE.remove(v);
-            System.out.println("Veículo removido com sucesso.");
+            System.out.println(veiculo.toString());
+            if (LDELocacoes.INSTANCE.existeVeiculo(placa)) {
+                System.out.println("Veiculo não pode ser removido!");
+            } else {
+                LDEVeiculos.INSTANCE.remove(veiculo);
+                System.out.println("Veiculo removido com sucesso.");
+            }
         }
     }
 
     public void listarReverso() {
-        System.out.println(LDEVeiculos.INSTANCE.imprimeInverso());
+        System.out.println(LDEVeiculos.INSTANCE.imprimeReverso());
     }
 
     public void listar() {
