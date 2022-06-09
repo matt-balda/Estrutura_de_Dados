@@ -1,6 +1,7 @@
-public class TDAVetor {
+public class TDAVetor implements IVetor{
     private int[] numeros = new int[10];
     private int totalnumeros = 0;
+    private static int num;
 
     public void adiciona(int numero) {
         this.garanteEspaco();
@@ -17,7 +18,9 @@ public class TDAVetor {
 
     public void garanteEspaco() {
         if (this.cheio()) {
-            int[] novonumeros = new int[this.numeros.length * 2];
+            num = 0;
+            num++; // adicionado um incrementador para quando estiver cheio o vetor, ir incrementando de 1, solucionando com sucesso a busca binaria
+            int[] novonumeros = new int[this.numeros.length + num];
             for (int i = 0; i < this.numeros.length; i++) {
                 novonumeros[i] = this.numeros[i];
             }
@@ -55,77 +58,61 @@ public class TDAVetor {
         return false;
     }
 
-    public static int maiorRecursivo(int[] v, int i, int f) {
-        if (i == f) {
-            return v[i];
-        } else {
-            int meio = (i + f) / 2;
-            int max1 = maiorRecursivo(v, i, meio);
-            int max2 = maiorRecursivo(v, meio + 1, f);
-            if (max1 > max2) {
-                return max1;
-            } else {
-                return max2;
-            }
-        }
+    public static int busca(int[] v, int valor) {
+        return buscaBinariaRecursiva(v, 0, v.length - 1, valor);
     }
-    public int buscaBinariaIter(int valor){
-        int n = numeros.length;
-        int aux = 0;
 
-        for(int i = 0; i < n-1; i++){
-            for(int j = i+1 ; i < n; j++){
-                if(numeros[i] > numeros[j]){
-                    aux = numeros[j];
-                    numeros[j] = numeros[i];
-                    numeros[i] = aux;
-                }
-            }
-        }
+    public static int buscaBinariaRecursiva(int[] v, int inicio, int fim, int valor) {
+        BubbleSort bs = new BubbleSort();
+        bs.ordenar(v);
+        int media = (fim + inicio) / 2;
+        int valorMeio = v[media];
+
+        if (inicio > fim)
+            return -1;
+        else if (valorMeio == valor)
+            return media;
+        else if (valorMeio < valor)
+            return buscaBinariaRecursiva(v, media + 1, fim, valor);
+        else
+            return buscaBinariaRecursiva(v, inicio, media - 1, valor);
+    }
+
+    public int buscaBinariaIter(int[] v, int valor) {
+        BubbleSort bs = new BubbleSort();
+        bs.ordenar(v);
         int inicio = 0;
-        int fim = n;
-
-        while (inicio <= fim){
-            int meio = (inicio + fim)/2;
-            if (numeros[meio] == valor){
+        int fim = v.length - 1;
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+            if (v[meio] == valor) {
                 return meio;
-            }else if (numeros[meio] > valor){
-                fim = meio -1;
-            }else {
-                inicio = meio +1;
+            } else if (v[meio] > valor) {
+                fim = meio - 1;
+            } else {
+                inicio = meio + 1;
             }
         }
-    }
-//    public static int menorRecursivo(int[] v, int i, int f){
-//        if (i == f) {
-//            return v[i];
-//        } else {
-//            int meio = (i + f) / 2;
-//            int max1 = menorRecursivo(v, i, meio);
-//            int max2 = menorRecursivo(v, meio + 1, f);
-//            if (max1 < max2) {
-//                return max1;
-//            } else {
-//                return max2;
-//            }
-//        }
-//    }
-    public int maiorIterativo(){
-        int maior = 0;
-        for (int i = 0; i < this.numeros.length; i++) {
-            if (numeros[i] > maior) {
-                maior = numeros[i];
-            }
-        }
-        return maior;
+        return -1;
     }
 
     public String imprime() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < numeros.length; i++) {
             if (numeros[i] != 0) { // garante que a impressao dos elementos do vetor, nao sejam nulos
-                stringBuilder.append(numeros[i]);
-                stringBuilder.append("\n");
+                stringBuilder.append(numeros[i] + " ");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public String imprimeOrdenado() {
+        StringBuilder stringBuilder = new StringBuilder();
+        BubbleSort bs = new BubbleSort();
+        bs.ordenar(numeros);
+        for (int i = 0; i < numeros.length; i++) {
+            if (numeros[i] != 0) { // garante que a impressao dos elementos do vetor, nao sejam nulos
+                stringBuilder.append(numeros[i] + " ");
             }
         }
         return stringBuilder.toString();
@@ -133,6 +120,7 @@ public class TDAVetor {
 
     /**
      * Metodo para acessar o vetor da TDAVetor
+     *
      * @return vetor numeros
      */
     public int[] getNumeros() {
