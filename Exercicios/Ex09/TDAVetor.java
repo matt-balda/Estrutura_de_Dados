@@ -1,6 +1,7 @@
-public class TDAVetor {
+public class TDAVetor implements IVetor{
     private int[] numeros = new int[10];
     private int totalnumeros = 0;
+    private int num;
 
     public void adiciona(int numero) {
         this.garanteEspaco();
@@ -17,7 +18,9 @@ public class TDAVetor {
 
     public void garanteEspaco() {
         if (this.cheio()) {
-            int[] novonumeros = new int[this.numeros.length * 2];
+            num = 0;
+            num++;
+            int[] novonumeros = new int[this.numeros.length + 1];
             for (int i = 0; i < this.numeros.length; i++) {
                 novonumeros[i] = this.numeros[i];
             }

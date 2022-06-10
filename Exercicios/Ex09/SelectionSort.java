@@ -1,5 +1,4 @@
 public class SelectionSort {
-
     public void ordenarSelection(int[] v) {
         for (int i = 0; i < v.length; i++) {
             int menor = i;
