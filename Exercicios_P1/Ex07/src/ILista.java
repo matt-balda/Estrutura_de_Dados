@@ -10,4 +10,9 @@ public interface ILista {
     public int tamanho();
 
     public String imprime();
+
+    public void imprime_rec1();
+
+    public void imprime_rec(Noh node);
+
 }

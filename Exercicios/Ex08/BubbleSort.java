@@ -1,6 +1,6 @@
 public class BubbleSort {
 
-    public void ordenar(int[] v) {
+    public static void ordenar(int[] v) {
         for (int i = 0; i < v.length - 1; i++) {
             for (int j = 0; j < v.length - 1 - i; j++) {
                 if (v[j] > v[j + 1]) {

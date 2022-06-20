@@ -34,6 +34,6 @@ public class Main {
         /**
          * Método para printar na tela, todos elementos do vetor
          */
-        System.out.println(alunos.toString());
+        System.out.println(alunos);
     }
 }

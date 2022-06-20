@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class VetorAlunos implements IVetor {
     private Aluno[] alunos = new Aluno[3];
     private int totalAlunos = 0;
@@ -61,10 +59,10 @@ public class VetorAlunos implements IVetor {
         return totalAlunos;
     }
 
-    @Override
-    public String toString() {
-        return "Alunos:\n" + Arrays.toString(alunos) +
-                " TotalAlunos: " + totalAlunos;
+    public void imprime() {
+        for (int i = 0; i < alunos.length; i++) {
+            System.out.println(alunos[i]);
+        }
     }
 }
 
