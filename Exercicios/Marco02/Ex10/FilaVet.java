@@ -1,6 +1,7 @@
-public class FilaVet {
+public class FilaVet implements IFila {
     private int nElemFila; //elementos do vetor
     private int inicio; // inicio
+    private int fim;
     private Object[] vetFila;
 
     public FilaVet(int tamFila) { //construtor
@@ -14,7 +15,7 @@ public class FilaVet {
             System.out.println("Capacidade da fila esgotou");
             return false;
         }
-        int fim = (this.inicio + this.nElemFila) % this.vetFila.length;
+        fim = (this.inicio + this.nElemFila) % this.vetFila.length;
         this.vetFila[fim] = info;
         this.nElemFila++;
         return true;
@@ -31,22 +32,22 @@ public class FilaVet {
     }
 
     public boolean isEmpty() {
-        if (this.nElemFila == 0){
+        if (this.nElemFila == 0) {
             return true;
         }
         return false;
     }
 
-    public int size(){
+    public int size() {
         return this.nElemFila;
     }
 
-    public String imprime(){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < this.nElemFila; i++){
-            if (N)
-            stringBuilder.append(vetFila[i]+" ");
+    public String imprime() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (int i = this.inicio; i < this.vetFila.length; i++) {
+            if (vetFila[i] != null) {
+                stringBuilder.append(vetFila[i] + " ");
+            }
         }
         return stringBuilder.toString();
     }
