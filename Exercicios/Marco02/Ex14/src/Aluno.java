@@ -1,11 +1,11 @@
 public class Aluno {
-
     private int matricula;
     private String nome;
     private double nota;
     private int idade;
 
-    public Aluno(String nome, double nota, int idade) {
+    public Aluno(int matricula, String nome, double nota, int idade) {
+        this.matricula = matricula;
         this.nome = nome;
         this.nota = nota;
         this.idade = idade;
@@ -45,10 +45,10 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno" +
-                " nome='" + nome + '\'' +
-                ", nota=" + nota +
-                ", idade=" + idade +
-                '}';
+        return "Aluno{" +
+                " Matricula: "+ matricula+
+                " Nome: " + nome +
+                " Nota: " + nota +
+                " Idade: " + idade;
     }
 }

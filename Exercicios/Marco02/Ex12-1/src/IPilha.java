@@ -8,4 +8,6 @@ public interface IPilha {
     public boolean isEmpty();
 
     public int size();
+
+    public boolean palindromo(String palavra);
 }

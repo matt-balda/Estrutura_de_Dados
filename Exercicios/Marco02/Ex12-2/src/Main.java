@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         FilaLista fila = new FilaLista();
         PilhaLista pilha = new PilhaLista();
+
         Aluno a1 = new Aluno("Pafuncia",59,9.9);
         Aluno a2 = new Aluno("Gilbertão",57,8.0);
         Aluno a3 = new Aluno("Robertão",15,6.0);

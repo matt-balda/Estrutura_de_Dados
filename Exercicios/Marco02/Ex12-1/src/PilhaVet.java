@@ -34,7 +34,7 @@ public class PilhaVet implements IPilha {
     }
 
     public boolean isEmpty() {
-        if (numElem == 0) {
+        if (pilha.length == 0) {
             return true;
         }
         return false;
