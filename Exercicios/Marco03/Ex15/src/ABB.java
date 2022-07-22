@@ -36,26 +36,29 @@ public class ABB {
         }
     }
 
-    public Noh get(Noh raiz, int v){
+    public Noh get(int v){
+        return get2(this.raiz, v);
+    }
+    private Noh get2(Noh raiz, int v){
         if (isEmpty()){
             return null;
         }else if (raiz.getValor() > v){
-            return get(raiz.esq, v);
+            return get2(raiz.esq, v);
         }else if(raiz.getValor() < v){
-            return get(raiz.dir, v);
+            return get2(raiz.dir, v);
         }
         return raiz;
     }
 
-    public String imprimir(Noh aux) {
-        final StringBuilder stringBuilder = new StringBuilder();
-        aux = getRaiz();
+    public void imprimir(){
+         imprimir2(this.raiz);
+    }
+    private  void imprimir2(Noh aux) {
         if (aux != null) {
-            imprimir(aux.esq);
-            stringBuilder.append(aux.valor).append("\n");
-            imprimir(aux.dir);
+            imprimir2(aux.esq);
+            System.out.print(aux.valor+" ");
+            imprimir2(aux.dir);
         }
-        return stringBuilder.toString();
     }
 
     public Noh getRaiz() {
