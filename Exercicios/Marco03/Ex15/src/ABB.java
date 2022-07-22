@@ -1,3 +1,5 @@
+import java.io.PrintStream;
+
 public class ABB {
     private Noh raiz;
 
@@ -51,12 +53,13 @@ public class ABB {
     }
 
     public void imprimir(){
-         imprimir2(this.raiz);
+        imprimir2(this.raiz);
     }
-    private  void imprimir2(Noh aux) {
+    private void imprimir2(Noh aux) {
+        PrintStream p = new PrintStream(System.out);
         if (aux != null) {
             imprimir2(aux.esq);
-            System.out.print(aux.valor+" ");
+            p.print(aux.valor+" ");
             imprimir2(aux.dir);
         }
     }
