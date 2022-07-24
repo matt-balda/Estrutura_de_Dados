@@ -23,7 +23,7 @@ public class FilaLista implements IFila {
         return true;
     }
 
-    public boolean remove() { //remove
+    public boolean remove(Aluno info) { //remove
         if (!isEmpty()) {
             if (inicio == fim) {
                 inicio = null;
